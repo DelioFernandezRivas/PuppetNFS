@@ -1,6 +1,6 @@
 # == Class: puppet
 #
-class puppetNFS::nfs {
+class puppetnfs::nfs {
 
 
     case $facts['networking']['domain'] {

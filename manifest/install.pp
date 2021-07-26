@@ -1,6 +1,6 @@
 # == Class: puppetNFS::install
 #
-class puppetNFS::install {
+class puppetnfs::install {
 
   case $facts['networking']['domain'] {
     'servernfs.lan': {
