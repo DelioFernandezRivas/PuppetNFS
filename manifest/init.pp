@@ -2,5 +2,5 @@
 #
 class puppetnfs {
   include 'puppetnfs::install'
-  include 'puppetnfs:: nfs'
+  include 'puppetnfs::nfs'
 }
