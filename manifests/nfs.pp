@@ -1,7 +1,7 @@
 # == Class: puppet
 #
 class puppetnfs::nfs(
-  $direccionservidor = '192.168.100.143'
+  $direccionservidor = unset
 
 
   ) {
