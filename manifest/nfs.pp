@@ -5,13 +5,13 @@ class puppetnfs::nfs {
 
     case $facts['networking']['domain'] {
       'servernfs.lan': {
-        file { 'spacedisk':
-          ensure  => present,
-          path    => "/data/",
-          mode    => '0755',
-          owner   => 'root',
-          group   => 'root',
-        }
+        #file { 'spacedisk':
+        #  ensure  => present,
+        #  path    => "/data/",
+        #  mode    => '0755',
+        #  owner   => 'root',
+        #  group   => 'root',
+        #}
         file_line { 'confnfsserver':
           ensure => present,
           path   => '/etc/exports',
