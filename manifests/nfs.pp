@@ -1,21 +1,27 @@
 # == Class: puppet
 #
-class puppetnfs::nfs {
+class puppetnfs::nfs(
+  $direccionservidor = '192.168.100.143'
+
+
+  ) {
 
 $direccionip = $facts['networking']['ip']
+$direcciondhcp = $facts['networking']['dhcp']
     case $facts['networking']['domain'] {
       'servernfs.lan': {
-        #file { 'spacedisk':
-        #  ensure  => present,
-        #  path    => "/data/",
-        #  mode    => '0755',
-        #  owner   => 'root',
-        #  group   => 'root',
-        #}
+        $direccionservidor=$facts['networking']['ip']
+        file { 'spacedisk':
+          ensure  => present,
+          path    => "/data/",
+          mode    => '0755',
+          owner   => 'root',
+          group   => 'root',
+        }
         file_line { 'confnfsserver':
           ensure => present,
           path   => '/etc/exports',
-          line   => "/data ${direccionip}/24 (rw, sync, no_subtree_check)",
+          line   => "/data  ${direcciondhcp}/24 (rw, sync, no_subtree_check)",
           match  => '^ ',
         }
       }
@@ -31,7 +37,7 @@ $direccionip = $facts['networking']['ip']
         file_line { 'confnfsclient':
           ensure => present,
           path   => '/etc/fstab',
-          line   => "${direccionip}:/data    /mnt/data   nfs auto,noatime,nolock,bg,nfsvers=4,intr,tcp,actimeo=1800 0 0
+          line   => "${direccionservidor}:/data    /mnt/data   nfs auto,noatime,nolock,bg,nfsvers=4,intr,tcp,actimeo=1800 0 0
 ",
           match  => '^ ',
         }
@@ -49,11 +55,10 @@ $direccionip = $facts['networking']['ip']
         file_line { 'confnfsclient':
           ensure => present,
           path   => '/etc/fstab',
-          line   => "${direccionip}:/data    /mnt/data   nfs auto,noatime,nolock,bg,nfsvers=4,intr,tcp,actimeo=1800 0 0
+          line   => "${direccionservidor}:/data    /mnt/data   nfs auto,noatime,nolock,bg,nfsvers=4,intr,tcp,actimeo=1800 0 0
 ",
           match  => '^ ',
         }
       }
     }
   }
-}

@@ -19,8 +19,8 @@ class puppetnfs::install {
 
 
     default: {
-      package { 'installnfs':
-        name   => 'nfs-kernel-server'
+      package { 'installnfsclient':
+        name   => 'nfs-common'
         ensure => installed,
       }
     }
